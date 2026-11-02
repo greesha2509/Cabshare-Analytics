@@ -10,25 +10,27 @@ import plotly.express as px
 
 PROJECT_DIR = Path(__file__).resolve().parent
 WORKSPACE_DIR = Path(__file__).resolve().parents[2]
+DATA_FILENAMES = {
+    "airport": "14a9c0c7-63b4-40c5-813e-6a930fef3f9e.csv",
+    "bengaluru": "Bengaluru Ola.csv",
+    "transit": "Transit_Hub_Ride_Data_Filtered.csv",
+    "urban_fare": "UrbanCabFare.csv",
+    "ncr": "ncr_ride_bookings.csv",
+}
 DATA_DIR = (
     PROJECT_DIR
-    if all((PROJECT_DIR / filename).is_file() for filename in [
-        "14a9c0c7-63b4-40c5-813e-6a930fef3f9e.csv",
-        "Bengaluru Ola.csv",
-        "Transit_Hub_Ride_Data_Filtered.csv",
-        "UrbanCabFare.csv",
-        "ncr_ride_bookings.csv",
-    ])
+    if all(
+        (PROJECT_DIR / filename).is_file()
+        or (PROJECT_DIR / f"{filename}.gz").is_file()
+        for filename in DATA_FILENAMES.values()
+    )
     else WORKSPACE_DIR
 )
 SITE_DIR = PROJECT_DIR
-DATA_PATHS = {
-    "airport": DATA_DIR / "14a9c0c7-63b4-40c5-813e-6a930fef3f9e.csv",
-    "bengaluru": DATA_DIR / "Bengaluru Ola.csv",
-    "transit": DATA_DIR / "Transit_Hub_Ride_Data_Filtered.csv",
-    "urban_fare": DATA_DIR / "UrbanCabFare.csv",
-    "ncr": DATA_DIR / "ncr_ride_bookings.csv",
-}
+DATA_PATHS = {}
+for dataset, filename in DATA_FILENAMES.items():
+    path = DATA_DIR / filename
+    DATA_PATHS[dataset] = path if path.is_file() else Path(f"{path}.gz")
 
 INK = "#18211F"
 MUTED = "#69736E"
