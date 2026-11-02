@@ -30,7 +30,7 @@ Then open `http://localhost:8000`.
 
 In repository **Settings → Pages**, choose **Deploy from a branch**, select `main` and `/(root)`, and save. GitHub Pages will serve the generated `index.html`.
 
-**Public data notice:** the Pages site is public even though the repository is private. The raw CSVs committed to the repository and the report values/charts are accessible to anyone.
+**Public data notice:** this repository and its Pages site are public. The raw CSVs committed to the repository and the report values/charts are accessible to anyone.
 
 The static report intentionally does not display invented machine-learning scores or train models in a visitor's browser. Re-run the Colab workflow to evaluate and validate model results.
 
